@@ -1,0 +1,37 @@
+# 使用 CocoaPods 官方 CDN，提高 pod 安装和更新速度（无需下载整个 Specs 仓库）
+source 'https://cdn.cocoapods.org/'
+
+# 忽略 .cocoapods 目录中多个 specs 源引起的警告
+install! 'cocoapods', :warn_for_unused_master_specs_repo => false
+
+# 设置 iOS 的最低支持版本
+platform :ios, '13.0'
+
+target 'ZHHSettingsTableView_Example' do
+  use_frameworks! # 启用 Framework 模式
+
+  # 引用本地开发中的 pod
+  pod 'ZHHSettingsTableView', :path => '../'
+
+  target 'ZHHSettingsTableView_Tests' do
+    inherit! :search_paths
+  end
+end
+
+# Pod 安装完成后的一些全局设置
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      # 设置 iOS 最低部署版本为 13.0
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+      
+      # 禁用 Bitcode，部分库可能不支持 Bitcode
+      config.build_settings['ENABLE_BITCODE'] = 'NO'
+      
+      # 禁用代码签名（适用于模拟器）
+      config.build_settings['EXPANDED_CODE_SIGN_IDENTITY'] = ''
+      config.build_settings['CODE_SIGNING_REQUIRED'] = 'NO'
+      config.build_settings['CODE_SIGNING_ALLOWED'] = 'NO'
+    end
+  end
+end

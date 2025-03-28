@@ -1,0 +1,16 @@
+PODS:
+  - ZHHSettingsTableView (0.1.0)
+
+DEPENDENCIES:
+  - ZHHSettingsTableView (from `../`)
+
+EXTERNAL SOURCES:
+  ZHHSettingsTableView:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  ZHHSettingsTableView: 086f38942c7b273e9c1559c736aebe2b0cfb43d7
+
+PODFILE CHECKSUM: f72c4b0f5d4e36780f6675f237e9458cd3ab9288
+
+COCOAPODS: 1.16.2
